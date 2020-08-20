@@ -88,11 +88,13 @@ if sourceType=="SNS":
   nNeutrinos = neutrinos_Per_Proton*nProtons
   if type=="CC":
     nNeutrinos = nNeutrinos/3.
-
   nNeutrinos_perCm_atDistance = nNeutrinos/(4*3.141592*math.pow(distance_from_source_cm,2))
 
   scaleFactor = nNeutrinos_perCm_atDistance*nAtoms*math.pow(10,-40)
+  
+elif sourceType=="SN":
+  #Calculate scale factor, i.e. number of neutrinos * math.pow(10,-40)
 
-  totalInteractions = hist.Integral()*scaleFactor
- 
-  print(totalInteractions)
+
+totalInteractions = hist.Integral()*scaleFactor
+print(totalInteractions)
