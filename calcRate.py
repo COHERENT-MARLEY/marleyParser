@@ -94,7 +94,7 @@ if sourceType=="SNS":
   
 elif sourceType=="SN":
   #Calculate scale factor, i.e. number of neutrinos * math.pow(10,-40)
-
+  print("To do")
 
 totalInteractions = hist.Integral()*scaleFactor
-print(totalInteractions)
+print("Expect " +str(totalInteractions)+" interactions")
