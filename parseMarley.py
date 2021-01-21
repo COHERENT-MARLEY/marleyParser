@@ -53,7 +53,7 @@ restMass_alpha=3727.38
 
 #Histogram settings
 maxEnergy=250 #MeV
-nBins=1000
+nBins=10000
 
 #Default in MARLEY
 neutrinoDirection=(0,0,1)
@@ -268,7 +268,7 @@ for i,line in enumerate(inpFile):
       protonEnergyHist.Fill(energy)
       protonEnergy[0]=energy
       nProtons[0]+=1
-    elif pdgCode==12 or pdgCode==14 or pdgCode==16:
+    elif abs(pdgCode)==12 or abs(pdgCode)==14 or abs(pdgCode)==16:
       finalNeutrinoEnergyHist.Fill(totalEnergy-restMass_nu)
       
   #See if this is the last final particle. If so, we can update hists
@@ -452,7 +452,13 @@ if oldFormat==0:
     normalizedNNeutronsHist.Scale(crossSection/normalizedNNeutronsHist.GetEntries())
     normalizedNNeutronsHist.GetYaxis().SetTitle("Cross Section (x 10^{-40}cm^{2})")
     normalizedNNeutronsHist.Write()
-      
+
+  normalizedNGammaHist=nGammasHist.Clone("normalizedNGammaHist")
+  if normalizedNGammaHist.GetEntries()>0:
+    normalizedNGammaHist.Scale(crossSection/normalizedNGammaHist.GetEntries())
+    normalizedNGammaHist.GetYaxis().SetTitle("Cross Section (x 10^{-40}cm^{2})")
+    normalizedNGammaHist.Write()
+    
   normalizedFinalNeutrinoEnergyHist=finalNeutrinoEnergyHist.Clone("normalizedFinalNeutrinoEnergyHist")
   if normalizedFinalNeutrinoEnergyHist.GetEntries()>0:
     normalizedFinalNeutrinoEnergyHist.Scale(crossSection/finalNeutrinoEnergyHist.GetEntries())
